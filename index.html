@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="assets/javascript/rps.js"></script>
+
+  <!-- Bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <br>
+
+    <!-- Jumbotron Title -->
+    <div class="jumbotron">
+      <h1 class="text-center">Rock Paper Scissors</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3 id="userChoice">Make your choice: </h3>
+            <span>
+                    <input type="image" id="rock" src="assets/images/rock.jpg" value="click me">
+                    <input type="image" id="paper" src="assets/images/paper.jpg" value="click me">
+                    <input type="image" id="scissors" src="assets/images/scissors.jpg" value="click me">
+            </span>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Computer Choice:</h3>
+            <span id="computerChoice">
+                <div id="computerPic"></div>
+            </span> 
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <h4>Wins:
+                <span id="youWin"></span>
+                <br>
+                Losses:
+                <span id="youLose"></span></h4>
+            </div>
+
+            <div class="col-md-4">
+            <div id="result"></div>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Wins:
+                <span id="compWin"></span>
+                <br>
+                Losses:
+                <span id="compLose"></span></h4>
+            </div>
+        </div>
+
+ 
+
+    
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+    
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyC_vvZ873jCrjZ7oCL84tSty7Hp5B1UFn0",
+        authDomain: "tuesday-2fac0.firebaseapp.com",
+        databaseURL: "https://tuesday-2fac0.firebaseio.com",
+        projectId: "tuesday-2fac0",
+        storageBucket: "tuesday-2fac0.appspot.com",
+        messagingSenderId: "236834820919"
+      };
+      
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      var name = "";
+      var role = "";
+      var date = "";
+      var rate = "";
+
+      $("#submit").on("click", function(event) {
+          event.preventDefault();
+
+          name = $("#name-input").val().trim();
+          role = $("#role-input").val().trim();
+          date = $("#date-input").val().trim();
+          rate = $("#rate-input").val().trim();
+
+          database.ref("employeeData").push({
+            name: name,
+            role: role,
+            date: firebase.database.ServerValue.TIMESTAMP,
+            rate: rate
+          })
+      })
+
+      database.ref("employeeData").on("child_added", function(childSnapshot) {
+          var dateConverted = moment(date).format("MMMM do YYYY");
+          $("#employee-table").append("<tr><td id='name-display'>" + 
+            childSnapshot.val().name + "</td><td id='role-display'>" + childSnapshot.val().role + 
+            "</td><td id='date-display'>" + childSnapshot.val().dateConverted + "</td><td id='month-display'>" + childSnapshot.val().month +
+            "</td><td id='rate-display'>" + childSnapshot.val().rate + "</td><td id='total-display'>" + childSnapshot.val().total + "</td>"
+            )
+      })
+
+
+
+
+
+    </script>
+
+  
+
+</body>
+
+</html>
