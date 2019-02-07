@@ -1,0 +1,31 @@
+#rock, #paper, #scissors {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+}
+
+img {
+    width:150px;
+    height: 150px;
+    margin-top:10px;
+    margin-left:180px;
+}
+
+h3 {
+    margin-left:150px;
+}
+
+#result {
+    text-align: center;
+    vertical-align:middle;
+    line-height: 90px;
+    font-size: 50px;
+    color:red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#youWin, #youLose, #compWin, #compLose {
+    text-align: center;
+    color:red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
